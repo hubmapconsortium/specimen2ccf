@@ -7,7 +7,7 @@ from argparse import ArgumentParser, RawTextHelpFormatter
 import specimen2ccf.pipeline
 
 
-logger = logging.getLogger("spatial2ccf")
+logger = logging.getLogger("specimen2ccf")
 
 script_name = os.path.basename(os.path.realpath(sys.argv[0]))
 
