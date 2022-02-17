@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+import sys
+import os
+import logging
+from argparse import ArgumentParser, RawTextHelpFormatter
+
+import specimen2ccf.pipeline
+
+
+logger = logging.getLogger("spatial2ccf")
+
+script_name = os.path.basename(os.path.realpath(sys.argv[0]))
+
+if __name__ == "__main__":
+    parser = ArgumentParser(formatter_class=RawTextHelpFormatter)
+    parser.add_argument("input_url", nargs="+", help="one or more input URL (http, https, file)")
+    parser.add_argument("--ontology-iri", help="Ontology IRI")
+    parser.add_argument("-o", "--output", help="output OWL file")
+    parser.add_argument("-v", "--version", action="version",
+                        version="%(prog)s " + specimen2ccf.__version__)
+    args = parser.parse_args()
+
+    specimen2ccf.pipeline.run(args)
