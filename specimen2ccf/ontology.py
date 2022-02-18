@@ -28,6 +28,8 @@ class SCOntology:
         Property(CCF.has_biological_sex, baseType=OWL.ObjectProperty, graph=g)
         Property(CCF.donates, baseType=OWL.ObjectProperty, graph=g)
         Property(CCF.donated_by, baseType=OWL.ObjectProperty, graph=g)
+        Property(CCF.part_of_tissue_block, baseType=OWL.ObjectProperty,
+                 graph=g)
         Property(CCF.subdivided_into_sections, baseType=OWL.ObjectProperty,
                  graph=g)
         Property(CCF.generates_dataset, baseType=OWL.ObjectProperty, graph=g)
@@ -141,6 +143,8 @@ class SCOntology:
                                      section_number):
         self.graph.add((tissue_section_iri, RDF.type, OWL.NamedIndividual))
         self.graph.add((tissue_section_iri, RDF.type, CCF.tissue_section))
+        self.graph.add((tissue_section_iri, CCF.part_of_tissue_block,
+                        tissue_block_iri))
         self.graph.add((tissue_block_iri, CCF.subdivided_into_sections,
                         tissue_section_iri))
         self.graph.add((tissue_section_iri, CCF.donated_by, donor_iri))

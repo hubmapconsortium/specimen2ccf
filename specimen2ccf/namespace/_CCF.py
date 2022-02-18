@@ -16,6 +16,7 @@ class CCF(DefinedNamespace):
     has_member: URIRef
     located_in: URIRef
     subdivided_into_sections: URIRef
+    part_of_tissue_block: URIRef
     generates_dataset: URIRef
     has_rui_location: URIRef
     has_gene_marker: URIRef
