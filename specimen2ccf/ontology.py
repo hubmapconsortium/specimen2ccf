@@ -33,7 +33,7 @@ class SCOntology:
         Property(CCF.subdivided_into_sections, baseType=OWL.ObjectProperty,
                  graph=g)
         Property(CCF.generates_dataset, baseType=OWL.ObjectProperty, graph=g)
-        Property(CCF.has_rui_location, baseType=OWL.ObjectProperty, graph=g)
+        Property(CCF.has_registration_location, baseType=OWL.ObjectProperty, graph=g)
 
         return SCOntology(g)
 
@@ -86,11 +86,11 @@ class SCOntology:
             if sample_type == "Tissue Block":
                 tissue_block = any_sample
                 tissue_block_iri = self._uri(tissue_block['@id'])
-                rui_location_iri =\
+                registration_location_iri =\
                     self._uri(tissue_block['rui_location']['@id'])
                 self._add_tissue_block_to_graph(
                     tissue_block_iri,
-                    rui_location_iri,
+                    registration_location_iri,
                     donor_iri,
                     self._string(tissue_block['label']),  # more like a comment
                     self._string(tissue_block['description']),
@@ -119,14 +119,15 @@ class SCOntology:
                                   tissue_section['samples'])
                 self._add_datasets(tissue_section, tissue_section['datasets'])
 
-    def _add_tissue_block_to_graph(self, tissue_block_iri, rui_location_iri,
+    def _add_tissue_block_to_graph(self, tissue_block_iri,
+                                   registration_location_iri,
                                    donor_iri, comment, description, link,
                                    section_count, section_size,
                                    section_size_unit):
         self.graph.add((tissue_block_iri, RDF.type, OWL.NamedIndividual))
         self.graph.add((tissue_block_iri, RDF.type, CCF.tissue_block))
-        self.graph.add((tissue_block_iri, CCF.has_rui_location,
-                        rui_location_iri))
+        self.graph.add((tissue_block_iri, CCF.has_registration_location,
+                        registration_location_iri))
         self.graph.add((tissue_block_iri, CCF.comes_from, donor_iri))
         self.graph.add((donor_iri, CCF.provides, tissue_block_iri))
         self.graph.add((tissue_block_iri, RDFS.comment, comment))
