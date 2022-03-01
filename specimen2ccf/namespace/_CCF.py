@@ -10,8 +10,8 @@ class CCF(DefinedNamespace):
     _fail = True
 
     # http://www.w3.org/2002/07/owl#ObjectProperty
-    donates: URIRef
-    donated_by: URIRef
+    provides: URIRef
+    comes_from: URIRef
     has_biological_sex: URIRef
     has_member: URIRef
     located_in: URIRef

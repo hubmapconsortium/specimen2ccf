@@ -26,8 +26,8 @@ class SCOntology:
 
         # Declaration axioms
         Property(CCF.has_biological_sex, baseType=OWL.ObjectProperty, graph=g)
-        Property(CCF.donates, baseType=OWL.ObjectProperty, graph=g)
-        Property(CCF.donated_by, baseType=OWL.ObjectProperty, graph=g)
+        Property(CCF.provides, baseType=OWL.ObjectProperty, graph=g)
+        Property(CCF.comes_from, baseType=OWL.ObjectProperty, graph=g)
         Property(CCF.part_of_tissue_block, baseType=OWL.ObjectProperty,
                  graph=g)
         Property(CCF.subdivided_into_sections, baseType=OWL.ObjectProperty,
@@ -127,8 +127,8 @@ class SCOntology:
         self.graph.add((tissue_block_iri, RDF.type, CCF.tissue_block))
         self.graph.add((tissue_block_iri, CCF.has_rui_location,
                         rui_location_iri))
-        self.graph.add((tissue_block_iri, CCF.donated_by, donor_iri))
-        self.graph.add((donor_iri, CCF.donates, tissue_block_iri))
+        self.graph.add((tissue_block_iri, CCF.comes_from, donor_iri))
+        self.graph.add((donor_iri, CCF.provides, tissue_block_iri))
         self.graph.add((tissue_block_iri, RDFS.comment, comment))
         self.graph.add((tissue_block_iri, CCF.description, description))
         self.graph.add((tissue_block_iri, CCF.url, link))
@@ -147,8 +147,8 @@ class SCOntology:
                         tissue_block_iri))
         self.graph.add((tissue_block_iri, CCF.subdivided_into_sections,
                         tissue_section_iri))
-        self.graph.add((tissue_section_iri, CCF.donated_by, donor_iri))
-        self.graph.add((donor_iri, CCF.donates, tissue_section_iri))
+        self.graph.add((tissue_section_iri, CCF.comes_from, donor_iri))
+        self.graph.add((donor_iri, CCF.provides, tissue_section_iri))
         self.graph.add((tissue_section_iri, RDFS.comment, comment))
         self.graph.add((tissue_section_iri, CCF.description, description))
         self.graph.add((tissue_section_iri, CCF.url, link))
