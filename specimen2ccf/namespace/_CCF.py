@@ -18,7 +18,7 @@ class CCF(DefinedNamespace):
     subdivided_into_sections: URIRef
     part_of_tissue_block: URIRef
     generates_dataset: URIRef
-    has_rui_location: URIRef
+    has_registration_location: URIRef
     has_gene_marker: URIRef
     has_protein_marker: URIRef
     has_characterizing_biomarker_set: URIRef

@@ -33,7 +33,8 @@ class SCOntology:
         Property(CCF.subdivided_into_sections, baseType=OWL.ObjectProperty,
                  graph=g)
         Property(CCF.generates_dataset, baseType=OWL.ObjectProperty, graph=g)
-        Property(CCF.has_registration_location, baseType=OWL.ObjectProperty, graph=g)
+        Property(CCF.has_registration_location, baseType=OWL.ObjectProperty,
+                 graph=g)
 
         return SCOntology(g)
 
