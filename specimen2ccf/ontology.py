@@ -104,6 +104,7 @@ class SCOntology:
                     tissue_block_iri,
                     registration_location_iri,
                     donor_iri,
+                    self._string(sample_type),
                     self._string(tissue_block['label']),  # more like a comment
                     self._string(tissue_block['description']),
                     self._string(tissue_block['link']),
@@ -130,6 +131,7 @@ class SCOntology:
                     tissue_block_iri,
                     tissue_section_iri,
                     donor_iri,
+                    self._string(sample_type),
                     self._string(tissue_section['label']),  # more like a comment
                     self._string(tissue_section['description']),
                     self._string(tissue_section['link']),
@@ -147,7 +149,8 @@ class SCOntology:
 
     def _add_tissue_block_to_graph(self, tissue_block_iri,
                                    registration_location_iri,
-                                   donor_iri, comment, description, link,
+                                   donor_iri, sample_type, comment,
+                                   description, link,
                                    section_count, section_size,
                                    section_size_unit, publisher):
         self.graph.add((tissue_block_iri, RDF.type, OWL.NamedIndividual))
@@ -156,6 +159,7 @@ class SCOntology:
                         registration_location_iri))
         self.graph.add((tissue_block_iri, CCF.comes_from, donor_iri))
         self.graph.add((donor_iri, CCF.provides, tissue_block_iri))
+        self.graph.add((tissue_block_iri, CCF.sample_type, sample_type))
         self.graph.add((tissue_block_iri, RDFS.comment, comment))
         self.graph.add((tissue_block_iri, CCF.description, description))
         self.graph.add((tissue_block_iri, CCF.url, link))
@@ -167,8 +171,8 @@ class SCOntology:
 
     def _add_tissue_section_to_graph(self, tissue_block_iri,
                                      tissue_section_iri, donor_iri,
-                                     comment, description, link,
-                                     section_number, publisher):
+                                     sample_type, comment, description,
+                                     link, section_number, publisher):
         self.graph.add((tissue_section_iri, RDF.type, OWL.NamedIndividual))
         self.graph.add((tissue_section_iri, RDF.type, CCF.tissue_section))
         self.graph.add((tissue_section_iri, CCF.part_of_tissue_block,
@@ -177,6 +181,7 @@ class SCOntology:
                         tissue_section_iri))
         self.graph.add((tissue_section_iri, CCF.comes_from, donor_iri))
         self.graph.add((donor_iri, CCF.provides, tissue_section_iri))
+        self.graph.add((tissue_section_iri, CCF.sample_type, sample_type))
         self.graph.add((tissue_section_iri, RDFS.comment, comment))
         self.graph.add((tissue_section_iri, CCF.description, description))
         self.graph.add((tissue_section_iri, CCF.url, link))

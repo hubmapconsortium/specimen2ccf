@@ -40,6 +40,7 @@ class CCF(DefinedNamespace):
     consortium_name: URIRef
     tissue_provider_name: URIRef
     tissue_provider_uuid: URIRef
+    sample_type: URIRef
     section_number: URIRef
     section_count: URIRef
     section_size: URIRef
