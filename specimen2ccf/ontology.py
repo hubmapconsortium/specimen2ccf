@@ -67,8 +67,8 @@ class SCOntology:
             self._get_biological_sex(obj),
             self._get_bmi(obj),
             self._string(obj['consortium_name']),
-            self._string(obj['provider_name']),
-            self._string(obj['provider_uuid']),
+            self._get_provider_name(obj),
+            self._get_provider_uuid(obj),
             publisher)
         if 'samples' in obj:
             self._add_samples(donor_iri, None, obj['samples'], publisher)
@@ -81,15 +81,17 @@ class SCOntology:
         self.graph.add((donor_iri, CCF.description, description))
         self.graph.add((donor_iri, RDFS.comment, comment))
         self.graph.add((donor_iri, CCF.url, link))
-        if age is not None:
+        if age:
             self.graph.add((donor_iri, CCF.age, age))
-        if biological_sex is not None:
+        if biological_sex:
             self.graph.add((donor_iri, CCF.has_biological_sex, biological_sex))
-        if bmi is not None:
+        if bmi:
             self.graph.add((donor_iri, CCF.bmi, bmi))
         self.graph.add((donor_iri, CCF.consortium_name, consortium_name))
-        self.graph.add((donor_iri, CCF.tissue_provider_name, provider_name))
-        self.graph.add((donor_iri, CCF.tissue_provider_uuid, provider_uuid))
+        if provider_name:
+            self.graph.add((donor_iri, CCF.tissue_provider_name, provider_name))
+        if provider_uuid:
+            self.graph.add((donor_iri, CCF.tissue_provider_uuid, provider_uuid))
         self.graph.add((donor_iri, DCTERMS.publisher, publisher))
 
     def _add_samples(self, donor_iri, tissue_block, any_samples, publisher):
@@ -229,6 +231,18 @@ class SCOntology:
     def _get_bmi(self, obj):
         try:
             return self._decimal(obj['bmi'])
+        except KeyError:
+            return None
+
+    def _get_provider_name(self, obj):
+        try:
+            return self._string(obj['provider_name'])
+        except KeyError:
+            return None
+
+    def _get_provider_uuid(self, obj):
+        try:
+            return self._string(obj['provider_uuid'])
         except KeyError:
             return None
 
