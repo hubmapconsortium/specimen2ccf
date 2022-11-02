@@ -30,7 +30,7 @@ setup(name='specimen2ccf',
           'rdflib==5.0.0',
           'requests_file==1.5.1'
       ],
-      python_requires='>=3.5, <3.9',
+      python_requires='>=3.5',
       test_suite='nose.collector',
       tests_require=['nose'],
       packages=find_packages(),
